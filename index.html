@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111512"><title>G.O.A.T.S. // ARCHIVE</title>
+<style>
+:root{color-scheme:dark;--bg:#111512;--fg:#c5c8bb;--muted:#777f73;--line:#343c34;--accent:#a6ad91;--error:#b47c6d}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:28px 16px;background:radial-gradient(ellipse at 50% 15%,#20291f,transparent 58%),repeating-linear-gradient(0deg,#ffffff03 0 1px,transparent 1px 3px),var(--bg);color:var(--fg);font:15px/1.7 "Courier New",monospace}
+main{width:min(720px,100%);margin:7vh auto 40px}header,footer{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:11px;letter-spacing:.13em}header{border-bottom:1px solid var(--line);padding-bottom:13px}
+h1{font-size:clamp(34px,8vw,58px);font-weight:400;letter-spacing:.18em;margin:48px 0 0;color:#d4d5c9}.subtitle{font-size:11px;color:var(--muted);letter-spacing:.2em}.rule{height:1px;background:var(--line);margin:28px 0}
+.panel{border:1px solid var(--line);background:#141a15e8;padding:clamp(20px,5vw,34px);box-shadow:0 18px 60px #0005}.kicker{font-size:10px;letter-spacing:.2em;color:var(--muted);margin:0 0 22px}h2{font-size:16px;letter-spacing:.12em;font-weight:400;margin:0 0 16px;color:#d0d1c5}p{margin:10px 0}.muted{color:var(--muted)}
+form{display:flex;gap:9px;margin-top:25px;flex-wrap:wrap}input{flex:1;min-width:190px;background:#0d110e;border:1px solid #495247;color:#e0e0d4;padding:13px 14px;font:inherit;letter-spacing:.16em;outline:none;border-radius:0}input:focus{border-color:var(--accent)}
+button{background:#242c24;border:1px solid #626b59;color:#d9dccd;padding:12px 18px;font:inherit;letter-spacing:.08em;cursor:pointer;border-radius:0}button:hover{background:#303a30}.message{min-height:25px;margin-top:12px;color:var(--error);font-size:12px}.hidden{display:none!important}.record{border-left:1px solid #66705d;padding:2px 0 2px 17px;margin:22px 0;color:#c1c4b7}.faint{opacity:.62}footer{border-top:1px solid var(--line);margin-top:30px;padding-top:13px;font-size:10px}@media(max-width:480px){main{margin-top:4vh}h1{margin-top:34px}}
+</style></head><body><main>
+<header><span>G.O.A.T.S. / ARCHIVE DIVISION</span><span>STATUS: DORMANT</span></header>
+<h1>G.O.A.T.S.</h1><div class="subtitle">GENERAL OBSERVATION &amp; ARCHIVAL TERMINAL SYSTEM</div><div class="rule"></div>
+<section class="panel" id="stage-1"><p class="kicker">ENTRY POINT // 01</p><h2>RESTRICTED ACCESS</h2><p class="muted">Tento archiv je neaktivní.</p><p class="muted">Pro přístup zadejte ověřovací kód.</p>
+<form data-stage="1"><input id="code-1" autocomplete="off" spellcheck="false" placeholder="Zadejte kód..." aria-label="První přístupový kód"><button type="submit">POTVRDIT</button></form><div class="message" id="message-1" aria-live="polite"></div></section>
+<section class="panel hidden" id="stage-2"><p class="kicker">ARCHIVE // 02</p><h2>ZÁZNAM NALEZEN</h2><p class="muted">Přístup částečně obnoven.</p><div class="record"><p>Soubor: <span class="faint">record_02.dat</span></p><p>Stav: neúplný</p><p>Poslední úprava: [DATA NEDOSTUPNÁ]</p></div><p>„Některé věci zůstaly uložené déle, než měly.“</p><p class="muted">Další část archivu vyžaduje samostatný klíč.</p>
+<form data-stage="2"><input id="code-2" autocomplete="off" spellcheck="false" placeholder="Zadejte další klíč..." aria-label="Druhý přístupový kód"><button type="submit">POKRAČOVAT</button></form><div class="message" id="message-2" aria-live="polite"></div></section>
+<section class="panel hidden" id="stage-3"><p class="kicker">ARCHIVE // 03</p><h2>POSLEDNÍ DOSTUPNÝ ZÁZNAM</h2><p class="muted">Obnovování dokončeno. Některé části záznamu chybí.</p><div class="record"><p>Projekt: G.O.A.T.S.</p><p>Účel: [NEPOTVRZENO]</p><p>Odpovědná osoba: [NEZNÁMÁ]</p><p>Stav projektu: DORMANT</p></div><p>„Pokud čtete tento záznam, archiv byl znovu otevřen.“</p><p class="muted">Konec dostupných dat.</p></section>
+<footer><span>G.O.A.T.S. // INTERNAL ARCHIVE</span><span>NO ACTIVE MAINTENANCE</span></footer></main>
+<script>
+// Nahraď placeholdery vlastními kódy. Příklad: 1: "KLIC1"
+const ACCESS_CODES={1:"PLACEHOLDER_1",2:"PLACEHOLDER_2",3:"PLACEHOLDER_3"};
+function showStage(n){document.querySelectorAll('[id^="stage-"]').forEach(x=>x.classList.add('hidden'));document.getElementById('stage-'+n).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('form[data-stage]').forEach(form=>form.addEventListener('submit',e=>{e.preventDefault();const n=Number(form.dataset.stage),input=document.getElementById('code-'+n),msg=document.getElementById('message-'+n),entered=input.value.trim().toUpperCase(),expected=ACCESS_CODES[n].trim().toUpperCase();if(expected.startsWith('PLACEHOLDER_')){msg.textContent='Tato část zatím nemá nastavený kód.';return;}if(entered===expected)showStage(n+1);else{msg.textContent='Kód nebyl rozpoznán.';input.select();}}));
+</script></body></html>
